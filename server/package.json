@@ -2,7 +2,7 @@
   "name": "score-model-photography-contest",
   "version": "1.0.0",
   "description": "A practice repository to implement scoring model in a photography contest",
-  "main": "server/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \\\"Error: no test specified\\\" && exit 1"
   },
