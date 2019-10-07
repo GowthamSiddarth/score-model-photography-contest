@@ -1,0 +1,22 @@
+{
+  "name": "score-model-photography-contest",
+  "version": "1.0.0",
+  "description": "A practice repository to implement scoring model in a photography contest",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gs.github.com:GowthamSiddarth/score-model-photography-contest.git"
+  },
+  "keywords": [
+    "mern",
+    "scoring",
+    "auth",
+    "survey",
+    "contest"
+  ],
+  "author": "Gowtham Behara",
+  "license": "MIT"
+}
