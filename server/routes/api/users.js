@@ -10,6 +10,8 @@ const validateUserLogin = require('../../helper/validation/user-login');
 
 const { simpleMessageResponse } = require('../../helper/response-entity/response-body');
 
+const secretOrKey = require('../../config/keys').secretOrKey;
+
 router.post('/register', (req, res) => {
     let { errors, isValid } = validateUserRegister(req.body);
 
@@ -41,6 +43,41 @@ router.post('/register', (req, res) => {
                             });
                     }
                 });
+            });
+        }
+    });
+});
+
+router.post('/login', (req, res) => {
+    let { errors, isValid } = validateUserLogin(req.body);
+
+    if (!isValid) {
+        res.status(400).json(errors);
+    }
+
+    const email = req.body.email;
+    const password = req.body.password;
+
+    User.findOne({ email: email }).then(user => {
+        if (!user) {
+            res.status(404).json(simpleMessageResponse(false, "User not found!"));
+        } else {
+            bcrypt.compare(password, user.password).then(matched => {
+                if (matched) {
+                    const jwtPayload = {
+                        id: user.id,
+                        name: user.name
+                    };
+
+                    jwt.sign(jwtPayload, secretOrKey, { expiresIn: 31556926 }).then(token => {
+                        res.json({
+                            success: true,
+                            token: "Bearer " + token
+                        });
+                    });
+                } else {
+                    res.status(400).json(simpleMessageResponse(false, "Password Incorrect!"));
+                }
             });
         }
     });
