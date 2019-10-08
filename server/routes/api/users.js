@@ -23,11 +23,11 @@ router.post('/register', (req, res) => {
         if (user) {
             res.status(400).json(simpleMessageResponse(false, "User already exists!"));
         } else {
-            const newUser = {
+            const newUser = new User({
                 email: req.body.email,
                 name: req.body.name,
                 password: req.body.password
-            };
+            });
 
             bcrypt.genSalt(10, (err, salt) => {
                 bcrypt.hash(newUser.password, salt, (err, hash) => {
