@@ -9,6 +9,7 @@ module.exports = (data) => {
     data.password = isEmpty(data.password) ? "" : data.password;
     data.confirm_password = isEmpty(data.confirm_password) ? "" : data.confirm_password;
 
+    console.log(data);
     if (validator.isEmpty(data.name)) {
         errors.name = "Name is required";
     }
@@ -26,10 +27,12 @@ module.exports = (data) => {
     }
 
     if (validator.isEmpty(data.confirm_password)) {
-        errors.confirm_password = "Password is required";
+        errors.confirm_password = "Confirm Password is required";
     } else if (!validator.isLength(data.confirm_password, { min: 6, max: 30 })) {
         errors.confirm_password = "Password must be min of 6 chars and max of 30 chars";
-    } else if (data.password !== data.confirm_password) {
+    }
+    
+    if (!isEmpty(data.password) && !isEmpty(data.confirm_password) && data.password !== data.confirm_password) {
         errors.password = errors.confirm_password = "Password and Confirm Password should be same";
     }
 
