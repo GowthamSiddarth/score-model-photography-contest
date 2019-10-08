@@ -9,7 +9,6 @@ module.exports = (data) => {
     data.password = isEmpty(data.password) ? "" : data.password;
     data.confirm_password = isEmpty(data.confirm_password) ? "" : data.confirm_password;
 
-    console.log(data);
     if (validator.isEmpty(data.name)) {
         errors.name = "Name is required";
     }
