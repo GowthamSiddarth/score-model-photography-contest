@@ -43,12 +43,12 @@ class Login extends Component {
                                 <b>Login</b> below
                             </h4>
                             <p className="grey-text text-darken-1">
-                                Don't have an account?<Link to="/register">Register</Link>
+                                Don't have an account?<Link to="/register"> Register</Link>
                             </p>
                         </div>
                     </div>
                     <form noValidate onSubmit={this.onSubmit}>
-                        <div className="input-field col s12">
+                        <div className="input-field col s8 offset-s2">
                             <input
                                 onChange={this.onChange}
                                 value={this.state.email}
@@ -58,17 +58,17 @@ class Login extends Component {
                             />
                             <label htmlFor="email">Email</label>
                         </div>
-                        <div className="input-field col s12">
+                        <div className="input-field col s8 offset-s2">
                             <input
                                 onChange={this.onChange}
                                 value={this.state.password}
                                 error={errors.password}
                                 id="password"
-                                type="text"
+                                type="password"
                             />
                             <label htmlFor="password">Password</label>
                         </div>
-                        <div className="col s12">
+                        <div className="col s8 offset-s2">
                             <button
                                 style={{
                                     width: "150px",
