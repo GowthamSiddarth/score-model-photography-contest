@@ -87,10 +87,10 @@ class Register extends Component {
                                 onChange={this.onChange}
                                 value={this.state.confirm_password}
                                 error={errors.confirm_password}
-                                id="confirmPassword"
+                                id="confirm_password"
                                 type="password"
                             />
-                            <label htmlFor="confirmPassword">Confirm Password</label>
+                            <label htmlFor="confirm_password">Confirm Password</label>
                         </div>
                         <div className="col s8 offset-s2" style={{ paddingLeft: "10px" }}>
                             <button
