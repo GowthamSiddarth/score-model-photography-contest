@@ -42,17 +42,17 @@ class Register extends Component {
                             <i className="material-icons left">keyboard_backspace</i>
                             Back to home
                         </Link>
-                        <div className="col s12" style={{ paddingLeft: "10px" }}>
+                        <div className="col s12">
                             <h4>
                                 <b>Register</b> below
                             </h4>
                             <p className="grey-text text-darken-1">
-                                Already have an account?<Link to="/login">Login</Link>
+                                Already have an account?<Link to="/login"> Login</Link>
                             </p>
                         </div>
                     </div>
                     <form noValidate onSubmit={this.onSubmit}>
-                        <div className="input-field col s12">
+                        <div className="input-field col s8 offset-s2">
                             <input
                                 onChange={this.onChange}
                                 value={this.state.name}
@@ -62,7 +62,7 @@ class Register extends Component {
                             />
                             <label htmlFor="name">Name</label>
                         </div>
-                        <div className="input-field col s12">
+                        <div className="input-field col s8 offset-s2">
                             <input
                                 onChange={this.onChange}
                                 value={this.state.email}
@@ -72,7 +72,7 @@ class Register extends Component {
                             />
                             <label htmlFor="email">Email</label>
                         </div>
-                        <div className="input-field col s12">
+                        <div className="input-field col s8 offset-s2">
                             <input
                                 onChange={this.onChange}
                                 value={this.state.password}
@@ -82,7 +82,7 @@ class Register extends Component {
                             />
                             <label htmlFor="password">Password</label>
                         </div>
-                        <div className="input-field col s12">
+                        <div className="input-field col s8 offset-s2">
                             <input
                                 onChange={this.onChange}
                                 value={this.state.confirm_password}
@@ -92,7 +92,7 @@ class Register extends Component {
                             />
                             <label htmlFor="confirmPassword">Confirm Password</label>
                         </div>
-                        <div className="col s12" style={{ paddingLeft: "10px" }}>
+                        <div className="col s8 offset-s2" style={{ paddingLeft: "10px" }}>
                             <button
                                 style={{
                                     width: "150px",
@@ -101,11 +101,10 @@ class Register extends Component {
                                     marginTop: "1rem"
                                 }}
                                 type="submit"
-                                className="btn btn-large waves-effect waves-light hoverable green accent-3"
+                                className="btn btn-large waves-effect waves-light hoverable green accent-4"
                             >
                                 Sign Up
                             </button>
-                            <label htmlFor="name">Name</label>
                         </div>
                     </form>
                 </div>
