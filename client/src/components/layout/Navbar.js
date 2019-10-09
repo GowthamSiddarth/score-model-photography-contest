@@ -10,15 +10,18 @@ class Navbar extends Component {
                         <Link
                             to="/"
                             style={{
-                                fontFamily: "monospace"
+                                fontFamily: "monospace",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between"
                             }}
                             className="col s5 brand-logo center black-text">
-                            <i className="material-icons">code</i>
+                            <i className="material-icons">photo</i>
                             MERN
                         </Link>
                     </div>
                 </nav>
-            </div>
+            </div >
         );
     }
 }
