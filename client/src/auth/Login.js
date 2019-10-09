@@ -32,7 +32,7 @@ class Login extends Component {
 
         return (
             <div className="container">
-                <div className="row">
+                <div className="row" style={{ paddingTop: "20px" }}>
                     <div className="col s8 offset-s2">
                         <Link to="/" className="btn-flat waves-effect">
                             <i className="material-icons left">keyboard_backspace</i>
