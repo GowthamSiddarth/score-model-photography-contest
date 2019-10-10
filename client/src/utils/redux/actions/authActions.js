@@ -12,7 +12,7 @@ export const registerUser = (userData, history) => dispatch => {
         }));
 }
 
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData, history) => dispatch => {
     axios.post('/api/users/login', userData)
         .then(res => {
             const { token } = res.data;
@@ -21,6 +21,8 @@ export const loginUser = userData => dispatch => {
             setAuthToken(token);
             const decode = jwtDecode(token);
             dispatch(setCurrentUser(decode));
+
+            history.push('/dashboard');
         })
         .catch(err => dispatch({
             type: GET_ERRORS,
@@ -41,9 +43,11 @@ const setUserLoading = () => {
     };
 }
 
-export const logoutUser = history => dispatch => {
+export const logoutUser = (history = null) => dispatch => {
     localStorage.removeItem('jwtToken');
     setAuthToken(false);
     dispatch(setCurrentUser({}));
-    history.push('/');
+    if (history) {
+        history.push('/');
+    }
 }

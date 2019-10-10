@@ -25,7 +25,7 @@ if (localStorage.jwtToken) {
 
   const currTime = Date.now();
   if (decoded.exp < currTime) {
-    store.dispatch(logoutUser(window.history));
+    store.dispatch(logoutUser());
   }
 }
 
