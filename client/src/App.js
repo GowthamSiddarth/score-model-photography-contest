@@ -23,7 +23,7 @@ if (localStorage.jwtToken) {
   const decoded = jwtDecode(token);
   store.dispatch(setCurrentUser(decoded));
 
-  const currTime = Date.now();
+  const currTime = Date.now() / 1000;
   if (decoded.exp < currTime) {
     store.dispatch(logoutUser());
   }
