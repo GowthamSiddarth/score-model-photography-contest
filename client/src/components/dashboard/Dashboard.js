@@ -34,7 +34,7 @@ class Dashboard extends Component {
                                 letterSpacing: "1.5px",
                                 marginTop: "1rem"
                             }}
-                            onClick={this.onLogoutClick}
+                            onClick={this.onLogoutClick.bind(this)}
                             className="btn btn-large waves-effect waves-light hoverable yellow accent-4 black-text">
                             Logout
                         </button>
