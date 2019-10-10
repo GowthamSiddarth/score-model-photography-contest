@@ -31,7 +31,7 @@ class Login extends Component {
             password: this.state.password
         };
 
-        console.log(user);
+        this.props.loginUser(user);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -120,7 +120,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loginUser: bindActionCreators(loginUser, dispatch);
+    loginUser: bindActionCreators(loginUser, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));
