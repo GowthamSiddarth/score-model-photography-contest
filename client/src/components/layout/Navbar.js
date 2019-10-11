@@ -1,30 +1,24 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Navbar } from "react-bootstrap";
 
-class Navbar extends Component {
+class NavigationBar extends Component {
     render() {
+        const navBarBrandStyle = {
+            fontFamily: "monospace",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between"
+        };
+
         return (
-            <div className="navbar-fixed">
-                <nav className="z-depth-2">
-                    <div className="navbar-wrapper">
-                        <Link
-                            to="/"
-                            style={{
-                                fontFamily: "monospace",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                textDecoration: "none"
-                            }}
-                            className="brand-logo center black-text">
-                            <i className="material-icons">photo</i>
-                            MERN
-                        </Link>
-                    </div>
-                </nav>
-            </div >
+            <Navbar bg="red" className="hoverable">
+                <Navbar.Brand href="/" style={navBarBrandStyle} className="center brand-logo">
+                    <i className="material-icons">photo</i>
+                    MERN
+                </Navbar.Brand>
+            </Navbar>
         );
     }
 }
 
-export default Navbar;
+export default NavigationBar;
