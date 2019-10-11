@@ -13,9 +13,10 @@ class Navbar extends Component {
                                 fontFamily: "monospace",
                                 display: "flex",
                                 alignItems: "center",
-                                justifyContent: "space-between"
+                                justifyContent: "space-between",
+                                textDecoration: "none"
                             }}
-                            className="col s5 brand-logo center black-text">
+                            className="brand-logo center black-text">
                             <i className="material-icons">photo</i>
                             MERN
                         </Link>
