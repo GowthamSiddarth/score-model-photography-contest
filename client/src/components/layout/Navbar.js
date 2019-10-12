@@ -29,25 +29,23 @@ class LoginNavLink extends Component {
 class NavigationBar extends Component {
     render() {
         return (
-            <div >
-                <Navbar className="hoverable py-0" fixed="top" collapseOnSelect expand="lg" style={{ height: "auto" }}>
-                    <Navbar.Brand href="/" style={navIconTextItemStyle}>
-                        <i className="material-icons">photo</i>
-                        SCORE YOUR PICS
+            <Navbar className="hoverable py-0" fixed="top" collapseOnSelect expand="lg" style={{ height: "auto" }}>
+                <Navbar.Brand href="/" style={navIconTextItemStyle}>
+                    <i className="material-icons">photo</i>
+                    SCORE YOUR PICS
                 </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbar-non-brand-items" />
-                    <Navbar.Collapse id="navbar-non-brand-items">
-                        <Nav className="mr-auto">
-                            <Nav.Link href="/">How to Use</Nav.Link>
-                            <Nav.Link href="/">Contact Us</Nav.Link>
-                        </Nav>
-                        <Nav>
-                            <RegisterNavLink />
-                            <LoginNavLink />
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-            </div>
+                <Navbar.Toggle aria-controls="navbar-non-brand-items" />
+                <Navbar.Collapse id="navbar-non-brand-items">
+                    <Nav className="mr-auto">
+                        <Nav.Link href="/">How to Use</Nav.Link>
+                        <Nav.Link href="/">Contact Us</Nav.Link>
+                    </Nav>
+                    <Nav>
+                        <RegisterNavLink />
+                        <LoginNavLink />
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         );
     }
 }
