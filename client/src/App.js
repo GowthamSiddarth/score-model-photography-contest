@@ -16,6 +16,8 @@ import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './private-route/PrivateRoute';
 
+import { Container, Row, Col } from "react-bootstrap";
+
 if (localStorage.jwtToken) {
   const token = localStorage.jwtToken;
   setAuthToken(token);
@@ -33,15 +35,23 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <div className="App">
-          <Navbar />
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Switch>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          </Switch>
-        </div>
+        <Container className="App">
+          <Row>
+            <Col>
+              <Navbar />
+            </Col>
+          </Row>
+          <Row style={{height: "75vh"}} className="valign-wrapper">
+            <Col>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Switch>
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+            </Col>
+          </Row>
+        </Container>
       </Router>
     </Provider>
   );
