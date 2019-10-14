@@ -61,7 +61,7 @@ class Register extends Component {
             <Container>
                 <Row>
                     <Col className="my-auto" md={4} xs={0}>
-                        <Link to="/" className="btn-flat waves-effect" style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Link to="/" className="btn-flat waves-effect" style={{ display: 'flex', justifyContent: 'center', textDecoration: 'none' }}>
                             <i className="material-icons left">keyboard_backspace</i>
                             Back to home
                                 </Link>
@@ -69,7 +69,7 @@ class Register extends Component {
                             <b>Register</b>
                         </h4>
                         <p className="grey-text text-darken-1 text-center">
-                            Already have an account?<Link to="/login"> Login</Link>
+                            Already have an account?<Link to="/login" style={{ textDecoration: 'none' }}> Login</Link>
                         </p>
                     </Col>
                     <Col md={{ span: 5, offset: 2 }} style={{ paddingTop: "30px" }}>
