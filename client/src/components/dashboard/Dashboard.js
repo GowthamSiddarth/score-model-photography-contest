@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 
 import { logoutUser } from "../../utils/redux/actions/authActions";
 
+import { Container, Row, Col, Button } from "react-bootstrap";
+
 class Dashboard extends Component {
 
     onLogoutClick(e) {
@@ -17,17 +19,18 @@ class Dashboard extends Component {
         const { user } = this.props.auth;
 
         return (
-            <div style={{ height: "75vh" }} className="container valign-wrapper">
-                <div className="row" style={{ paddingTop: "20px" }}>
-                    <div className="col s12 center-align">
+            <Container>
+                <Row>
+                    <Col className="text-center">
                         <h4>
                             <b>Hey there,</b> {user.name.split(" ")[0]}
                             <p className="flow-text grey-text text-darken-1">
                                 You're logged into
-                                <span style={{ fontFamily: "monospace" }}>Photography Scoring Model Contest</span>
+                                <span style={{ fontFamily: "monospace" }}> Photography Scoring Model Contest</span>
                             </p>
                         </h4>
-                        <button
+                        <Button
+                            variant="outline-secondary"
                             style={{
                                 width: "150px",
                                 borderRadius: "3px",
@@ -35,12 +38,12 @@ class Dashboard extends Component {
                                 marginTop: "1rem"
                             }}
                             onClick={this.onLogoutClick.bind(this)}
-                            className="btn btn-large waves-effect waves-light hoverable yellow accent-4 black-text">
-                            Logout
-                        </button>
-                    </div>
-                </div>
-            </div>
+                            className="waves-effect waves-light hoverable">
+                            Sign Out
+                        </Button>
+                    </Col>
+                </Row>
+            </Container>
         );
     }
 }
