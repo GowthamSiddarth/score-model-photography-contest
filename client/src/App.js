@@ -35,21 +35,19 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Container className="App" style={{maxWidth: "90%"}}>
+        <Container className="App" style={{ maxWidth: "90%" }}>
           <Row>
             <Navbar />
           </Row>
           <Row style={{ height: "75vh", paddingTop: "60px" }} className="valign-wrapper">
-            <Row>
-              <Col>
-                <Route exact path="/" component={Landing} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login} />
-                <Switch>
-                  <PrivateRoute exact path="/dashboard" component={Dashboard} />
-                </Switch>
-              </Col>
-            </Row>
+            <Col>
+              <Route exact path="/" component={Landing} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Switch>
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              </Switch>
+            </Col>
           </Row>
         </Container>
       </Router>

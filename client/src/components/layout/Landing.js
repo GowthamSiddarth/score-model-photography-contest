@@ -3,8 +3,6 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 
-import { Row, Col, Carousel } from "react-bootstrap";
-
 class Landing extends Component {
 
     componentDidMount() {
@@ -15,9 +13,7 @@ class Landing extends Component {
 
     render() {
         return (
-            <p>
-                Work In Progress
-            </p>
+            <h3 className="text-center">Work In Progress</h3>
         );
     }
 }
