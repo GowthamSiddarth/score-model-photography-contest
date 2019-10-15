@@ -26,6 +26,14 @@ class LoginNavLink extends Component {
     }
 }
 
+class AuthUserNameElement extends Component {
+    render() {
+        return (
+            <p className="black-text my-auto" style={{ fontFamily: "monospace", MozUserSelect: "none", WebkitUserSelect: "none", msUserSelect: "none" }}>Signed In as: {this.props.userName}</p>
+        );
+    }
+}
+
 class NavigationBar extends Component {
     render() {
         return (
@@ -40,10 +48,16 @@ class NavigationBar extends Component {
                         <Nav.Link href="/">How to Use</Nav.Link>
                         <Nav.Link href="/">Contact Us</Nav.Link>
                     </Nav>
-                    <Nav>
-                        <RegisterNavLink />
-                        <LoginNavLink />
-                    </Nav>
+                    {
+                        this.props.auth.isAuthenticated ?
+                            <Nav>
+                                <AuthUserNameElement userName={this.props.auth.user.name.split(" ")[0]} />
+                            </Nav> :
+                            <Nav>
+                                <RegisterNavLink />
+                                <LoginNavLink />
+                            </Nav>
+                    }
                 </Navbar.Collapse>
             </Navbar>
         );
