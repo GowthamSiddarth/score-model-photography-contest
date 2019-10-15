@@ -9,7 +9,6 @@ const secretOrKey = require('../../config/keys').secretOrKey;
 const Admin = require('../../models/Admin');
 
 router.post('/login', (req, res) => {
-    console.log('admin login');
     const { errors, isValid } = validateUserLogin(req.body);
 
     if (!isValid) {
