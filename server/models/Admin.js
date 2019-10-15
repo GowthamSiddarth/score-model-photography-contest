@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const mongooseSchemaExtend = require('mongoose-schema-extend');
+const Schema = mongoose.Schema;
 const UserSchema = require('./User');
 
-const AdminSchema = UserSchema.mongooseSchemaExtend({});
+const AdminSchema = new Schema(UserSchema.schema);
 
 module.exports = mongoose.model('admins', AdminSchema);
