@@ -32,7 +32,7 @@ class Login extends Component {
         const user = {
             email: this.state.email,
             password: this.state.password,
-            user_sign_in_type: e.target.id
+            userSignInType: e.target.id
         };
 
         this.props.loginUser(user, this.props.history);
@@ -112,7 +112,7 @@ class Login extends Component {
 
                                     <Dropdown.Toggle split variant="outline-primary" id="multi-user-sign-in" />
                                     <Dropdown.Menu>
-                                        <Dropdown.Item id="adminSignIn" onClick={this.onSubmit}><span className="text-primary">Sign In As Admin</span></Dropdown.Item>
+                                        <Dropdown.Item onClick={this.onSubmit}><span id="adminSignIn" className="text-primary">Sign In As Admin</span></Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </div>
