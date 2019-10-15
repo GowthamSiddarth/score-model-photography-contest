@@ -8,7 +8,7 @@ import classnames from 'classnames';
 
 import { loginUser } from "../../utils/redux/actions/authActions";
 
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Dropdown, ButtonGroup } from "react-bootstrap";
 
 class Login extends Component {
     constructor() {
@@ -96,19 +96,23 @@ class Login extends Component {
                                 <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
                             </Form.Group>
                             <div className="text-center">
-                                <Button
-                                    variant="outline-primary"
+                                <Dropdown as={ButtonGroup}
                                     style={{
                                         width: "150px",
                                         borderRadius: "3px",
                                         letterSpacing: "1.5px",
                                         marginTop: "1rem"
-                                    }}
-                                    type="submit"
-                                    className="waves-effect waves-light hoverable"
-                                >
-                                    Sign In
-                                </Button>
+                                    }}>
+                                    <Button
+                                        variant="outline-primary"
+                                        className="waves-effect waves-light hoverable" s
+                                        type="submit">Sign In</Button>
+
+                                    <Dropdown.Toggle split variant="outline-primary" id="multi-user-sign-in" />
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item onClick={this.onSubmit}><span className="text-primary">Sign In As Admin</span></Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </div>
                         </Form>
                     </Col>
