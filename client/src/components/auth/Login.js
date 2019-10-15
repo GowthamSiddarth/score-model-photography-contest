@@ -95,7 +95,7 @@ class Login extends Component {
                                 />
                                 <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
                             </Form.Group>
-                            <div class="text-center">
+                            <div className="text-center">
                                 <Button
                                     variant="outline-primary"
                                     style={{
