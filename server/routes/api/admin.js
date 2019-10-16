@@ -6,7 +6,7 @@ const router = express.Router();
 const validateUserLogin = require('../../helper/validation/user-login');
 const secretOrKey = require('../../config/keys').secretOrKey;
 
-const Admin = require('../../models/Admin');
+const Admin = require('../../models/users/Admin');
 
 router.post('/login', (req, res) => {
     const { errors, isValid } = validateUserLogin(req.body);
