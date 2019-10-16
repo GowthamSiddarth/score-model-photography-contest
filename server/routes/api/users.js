@@ -67,7 +67,8 @@ router.post('/login', (req, res) => {
                 if (matched) {
                     const jwtPayload = {
                         id: user.id,
-                        name: user.name
+                        name: user.name,
+                        isAdmin: false
                     };
 
                     jwt.sign(jwtPayload, secretOrKey, { expiresIn: 31556926 }, (err, token) => {
