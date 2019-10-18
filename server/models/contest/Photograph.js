@@ -21,6 +21,10 @@ const PhotographSchema = new Schema({
     contest_id: {
         type: Schema.Types.ObjectId,
         required: true
+    },
+    score_id: {
+        type: Schema.Types.ObjectId,
+        required: false
     }
 });
 

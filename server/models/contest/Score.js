@@ -3,15 +3,15 @@ const Schema = mongoose.Schema;
 
 const ScoreSchema = new Schema({
     user: {
-        type: Array[Object],
+        type: Schema.Types.ObjectId,
         required: true
     },
     score: {
-        type: Number,
+        type: Schema.Types.Number,
         required: true
     },
     photograph: {
-        type: Object,
+        type: Schema.Types.ObjectId,
         required: true
     }
 });

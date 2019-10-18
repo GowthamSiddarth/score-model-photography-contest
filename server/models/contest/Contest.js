@@ -3,16 +3,20 @@ const Schema = mongoose.Schema;
 
 const ContestSchema = new Schema({
     name: {
-        type: String,
+        type: Schema.Types.String,
         required: true
     },
     created_by: {
-        type: Object,
+        type: Schema.Types.ObjectId,
         required: true
     },
     created_on: {
-        type: Date,
+        type: Schema.Types.Date,
         default: Date.now
+    },
+    photographs: {
+        type: Schema.Types.Array,
+        required: false
     }
 });
 
