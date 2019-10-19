@@ -17,7 +17,7 @@ router.post('/login', (req, res) => {
     const { errors, isValid } = validateUserLogin(req.body);
 
     if (!isValid) {
-        res.status(400).json(errors);
+        return res.status(400).json(errors);
     }
 
     const { email, password } = req.body;
@@ -25,7 +25,7 @@ router.post('/login', (req, res) => {
     Admin.findOne({ email: email }).then(admin => {
         if (!admin) {
             errors.email = 'Admin not found!';
-            res.status(404).json(errors);
+            return res.status(404).json(errors);
         }
 
         bcrypt.compare(password, admin.password).then(matched => {
@@ -44,7 +44,7 @@ router.post('/login', (req, res) => {
                 });
             } else {
                 errors.password = "Password Incorrect!";
-                res.status(400).json(errors);
+                return res.status(400).json(errors);
             }
         });
     });
@@ -54,7 +54,7 @@ router.post('/create-contest', verifyToken, (req, res) => {
     const { errors, isValid } = validateContest(req.body);
 
     if (!isValid) {
-        res.status(400).json(errors);
+        return res.status(400).json(errors);
     }
 
     const { contestName, createdBy } = req.body;
@@ -62,7 +62,7 @@ router.post('/create-contest', verifyToken, (req, res) => {
     Contest.findOne({ name: contestName }).then(contest => {
         if (contest) {
             errors.contest_name = `Contest with name '${contestName}' already exists`;
-            res.status(400).json(errors);
+            return res.status(400).json(errors);
         }
 
         const newContest = new Contest({
@@ -74,7 +74,7 @@ router.post('/create-contest', verifyToken, (req, res) => {
             .then(_contest => res.json(simpleMessageResponse(true, "Contest Created")))
             .catch(err => {
                 console.log(err);
-                res.status(500).json(simpleMessageResponse(false, "Contest Creation Failed!"));
+                return res.status(500).json(simpleMessageResponse(false, "Contest Creation Failed!"));
             });
     });
 });
