@@ -13,7 +13,7 @@ const { simpleMessageResponse } = require('../../../helper/response-entity/respo
 const secretOrKey = require('../../../config/keys').secretOrKey;
 
 const login = (req, res, userType) => {
-    const { errors, isValid } = validateUserLogin(reqBody);
+    const { errors, isValid } = validateUserLogin(req.body);
 
     if (!isValid) {
         return res.status(400).json(errors);
