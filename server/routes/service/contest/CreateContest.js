@@ -1,4 +1,3 @@
-const { simpleMessageResponse } = require('../../../helper/response-entity/response-body');
 const validateContest = require('../../../helper/validation/create-contest');
 
 const Contest = require('../../../models/contest/Contest');
