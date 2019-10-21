@@ -6,7 +6,7 @@ module.exports = (string, paramName) => {
     string = isEmpty(string) ? "" : string;
 
     if (validator.isEmpty(string)) {
-        errors[paramName] = `${paramName} is empty!`;
+        errors[paramName] = `${paramName.split('_').join(' ')} is empty!`;
     }
 
     return {
