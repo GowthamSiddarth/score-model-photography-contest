@@ -4,7 +4,7 @@ const router = express.Router();
 const { verifyToken } = require('../../../helper/request-entity/request-headers');
 
 const login = require('../../service/auth/Login');
-const createContest = require('../contest/CreateContest');
+const createContest = require('../../service/contest/CreateContest');
 
 const admin = require('../../../models/users/types').ADMIN;
 
