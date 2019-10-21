@@ -11,7 +11,7 @@ const editContest = (contestOldName, contestNewName, editedBy) => {
         let { errors, isValid } = validateContest(contestOldName, editedBy, contestNewName);
 
         if (!isValid) {
-            resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
+            return resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
         }
 
         Contest.findOneAndUpdate({ name: contestOldName }, { 
@@ -22,9 +22,9 @@ const editContest = (contestOldName, contestNewName, editedBy) => {
             new: true,
             useFindAndModify: false
         }, (err, contest) => {
-            if (err) reject(err);
-            else if (!contest) resolve(messageResponse(false, `No contest found with name ${contestOldName}`, responseCode.FOUR_HUNDRED));
-            else resolve(messageResponse(true, `Contest name updated as ${contest.name}`));
+            if (err) return reject(err);
+            else if (!contest) return resolve(messageResponse(false, `No contest found with name ${contestOldName}`, responseCode.FOUR_HUNDRED));
+            else return resolve(messageResponse(true, `Contest name updated as ${contest.name}`));
         });
     });
 }

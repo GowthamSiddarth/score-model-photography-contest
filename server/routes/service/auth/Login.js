@@ -18,17 +18,17 @@ const login = (email, password, userType) => {
         let { errors, isValid } = validateUserLogin(email, password);
 
         if (!isValid) {
-            resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
+            return resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
         }
 
         const authUser = typeAdmin === userType ? Admin : typeUser === userType ? User : undefined;
 
-        if (undefined === authUser) resolve(messageResponse(false, "Could not identify user type!", responseCode.FIVE_HUNDRED));
+        if (undefined === authUser) return resolve(messageResponse(false, "Could not identify user type!", responseCode.FIVE_HUNDRED));
 
         authUser.findOne({ email: email }).then(user => {
             if (!user) {
                 errors.email = `${userType.toLowerCase()} not found!`;
-                resolve(objectResponse(false, errors, responseCode.FOUR_O_FOUR));
+                return resolve(objectResponse(false, errors, responseCode.FOUR_O_FOUR));
             }
 
             bcrypt.compare(password, user.password).then(matched => {
@@ -40,13 +40,13 @@ const login = (email, password, userType) => {
                     };
 
                     jwt.sign(jwtPayload, secretOrKey, { expiresIn: 31556926 }, (err, token) => {
-                        if (err) reject(err);
+                        if (err) return reject(err);
                         else
-                            resolve(objectResponse(true, { token: "Bearer " + token }, responseCode.TWO_HUNDRED));
+                            return resolve(objectResponse(true, { token: "Bearer " + token }, responseCode.TWO_HUNDRED));
                     });
                 } else {
                     errors.password = "Password Incorrect!";
-                    resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
+                    return resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
                 }
             });
         }).catch(err => reject(err));

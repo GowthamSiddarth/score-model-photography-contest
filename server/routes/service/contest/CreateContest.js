@@ -11,13 +11,13 @@ const createContest = (contestName, createdBy) => {
         const { errors, isValid } = validateContest(contestName, createdBy);
 
         if (!isValid) {
-            resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
+            return resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
         }
 
         Contest.findOne({ name: contestName }).then(contest => {
             if (contest) {
                 errors.contest_name = `Contest with name '${contestName}' already exists`;
-                resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
+                return resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
             } else {
                 new Contest({
                     name: contestName,

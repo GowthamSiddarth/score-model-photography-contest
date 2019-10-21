@@ -13,13 +13,13 @@ const register = (name, email, password, confirm_password) => {
         let { errors, isValid } = validateUserRegister(name, email, password, confirm_password);
 
         if (!isValid) {
-            resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
+            return resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
         }
 
         User.findOne({ email: req.body.email }).then(user => {
             if (user) {
                 errors.email = "email already registered!";
-                resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
+                return resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
             } else {
                 const newUser = new User({
                     email: req.body.email,
@@ -28,10 +28,10 @@ const register = (name, email, password, confirm_password) => {
                 });
 
                 bcrypt.genSalt(10, (err, salt) => {
-                    if (err) reject(err);
+                    if (err) return reject(err);
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if (err) {
-                            reject(err);
+                            return reject(err);
                         } else {
                             newUser.password = hash;
                             newUser.save()
