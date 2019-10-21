@@ -14,6 +14,14 @@ const ContestSchema = new Schema({
         type: Schema.Types.Date,
         default: Date.now
     },
+    last_edited_by: {
+        type: Schema.Types.ObjectId,
+        required: false
+    },
+    last_edited_on: {
+        type: Schema.Types.Date,
+        required: false
+    },
     photographs: {
         type: Schema.Types.Array,
         required: false
