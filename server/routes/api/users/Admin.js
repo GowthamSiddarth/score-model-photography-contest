@@ -8,7 +8,11 @@ const createContest = require('../../service/contest/CreateContest');
 
 const admin = require('../../../models/users/types').ADMIN;
 
-router.post('/login', (req, res) => login(req, res, admin));
+router.post('/login', (req, res) => {
+    login(req.body.email, req.body.password, admin).then(
+        ({ status, ...resObj }) => res.status(status).json(resObj)
+    ).catch(err => console.log(err));
+});
 
 router.post('/create-contest', verifyToken, (req, res) => createContest(req, res));
 
