@@ -13,7 +13,7 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    login(req.body.email, req.body.password, admin).then(
+    login(req.body.email, req.body.password, user).then(
         ({ status, ...resObj }) => res.status(status).json(resObj)
     ).catch(err => console.log(err));
 });
