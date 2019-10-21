@@ -15,7 +15,7 @@ const responseCode = require('../../../config/response-codes');
 
 const login = (email, password, userType) => {
     return new Promise((resolve, reject) => {
-        const { errors, isValid } = validateUserLogin(email, password);
+        let { errors, isValid } = validateUserLogin(email, password);
 
         if (!isValid) {
             resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
