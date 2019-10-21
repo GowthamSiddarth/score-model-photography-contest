@@ -1,21 +1,21 @@
 const validator = require('validator');
 const isEmpty = require('is-empty');
 
-module.exports = (data) => {
+module.exports = (email, password) => {
     let errors = {};
 
-    data.email = isEmpty(data.email) ? "" : data.email;
-    data.password = isEmpty(data.password) ? "" : data.password;
+    email = isEmpty(email) ? "" : email;
+    password = isEmpty(password) ? "" : password;
 
-    if (validator.isEmpty(data.email)) {
+    if (validator.isEmpty(email)) {
         errors.email = "Email is required";
-    } else if (!validator.isEmail(data.email)) {
+    } else if (!validator.isEmail(email)) {
         errors.email = "Email is invalid";
     }
 
-    if (validator.isEmpty(data.password)) {
+    if (validator.isEmpty(password)) {
         errors.password = "Password is required";
-    } else if (!validator.isLength(data.password, { min: 6, max: 30 })) {
+    } else if (!validator.isLength(password, { min: 6, max: 30 })) {
         errors.password = "Password must be min of 6 chars and max of 30 chars";
     }
 
