@@ -26,7 +26,7 @@ const login = (req, res, userType) => {
 
     authUser.findOne({ email: email }).then(user => {
         if (!user) {
-            errors.email = `${userType} not found!`;
+            errors.email = `${userType.toLowerCase()} not found!`;
             return res.status(404).json(errors);
         }
 
