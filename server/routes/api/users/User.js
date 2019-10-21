@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const register = require('../auth/Register');
-const login = require('../auth/Login');
+const register = require('../../service/auth/Register');
+const login = require('../../service/auth/Login');
 
 const user = require('../../../models/users/types').USER;
 
