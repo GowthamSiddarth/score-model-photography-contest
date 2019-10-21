@@ -14,6 +14,10 @@ router.post('/login', (req, res) => {
     ).catch(err => console.log(err));
 });
 
-router.post('/create-contest', verifyToken, (req, res) => createContest(req, res));
+router.post('/create-contest', verifyToken, (req, res) => {
+    createContest(req.body.contestName, req.body.createdBy).then(
+        ({ status, ...resObj }) => res.status(status).json(resObj)
+    ).catch(err => console.log(err));
+});
 
 module.exports = router;

@@ -3,32 +3,30 @@ const validateContest = require('../../../helper/validation/create-contest');
 
 const Contest = require('../../../models/contest/Contest');
 
-const createContest = (req, res) => {
-    const { errors, isValid } = validateContest(req.body);
+const { messageResponse, objectResponse } = require('../../../helper/response-entity/response-body');
 
-    if (!isValid) {
-        return res.status(400).json(errors);
-    }
+const responseCode = require('../../../config/response-codes');
 
-    const { contestName, createdBy } = req.body;
+const createContest = (contestName, createdBy) => {
+    return new Promise((resolve, reject) => {
+        const { errors, isValid } = validateContest(contestName, createdBy);
 
-    Contest.findOne({ name: contestName }).then(contest => {
-        if (contest) {
-            errors.contest_name = `Contest with name '${contestName}' already exists`;
-            return res.status(400).json(errors);
+        if (!isValid) {
+            resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
         }
 
-        const newContest = new Contest({
-            name: contestName,
-            created_by: createdBy
-        });
+        Contest.findOne({ name: contestName }).then(contest => {
+            if (contest) {
+                errors.contest_name = `Contest with name '${contestName}' already exists`;
+                resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
+            }
 
-        newContest.save()
-            .then(_contest => res.json(simpleMessageResponse(true, "Contest Created")))
-            .catch(err => {
-                console.log(err);
-                return res.status(500).json(simpleMessageResponse(false, "Contest Creation Failed!"));
-            });
+            new Contest({
+                name: contestName,
+                created_by: createdBy
+            }).save().then(_contest => resolve(messageResponse(true, "Contest Created")))
+                .catch(err => reject(err));
+        });
     });
 }
 
