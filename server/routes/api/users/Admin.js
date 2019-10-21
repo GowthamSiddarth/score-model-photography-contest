@@ -6,6 +6,7 @@ const { verifyToken } = require('../../../helper/request-entity/request-headers'
 const login = require('../../service/auth/Login');
 const createContest = require('../../service/contest/CreateContest');
 const editContest = require('../../service/contest/EditContest');
+const getContests = require('../../service/contest/GetContests');
 
 const admin = require('../../../models/users/types').ADMIN;
 
@@ -26,6 +27,12 @@ router.post('/create-contest', verifyToken, (req, res) => {
 router.post('/edit-contest', verifyToken, (req, res) => {
     const { contestOldName, contestNewName, editedBy } = req.body;
     editContest(contestOldName, contestNewName, editedBy).then(
+        ({ status, ...resObj }) => res.status(status).json(resObj)
+    ).catch(err => console.log(err));
+});
+
+router.get('/get-all-contests', verifyToken, (_req, res) => {
+    getContests().then(
         ({ status, ...resObj }) => res.status(status).json(resObj)
     ).catch(err => console.log(err));
 });
