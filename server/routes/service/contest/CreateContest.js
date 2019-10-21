@@ -1,4 +1,4 @@
-const validateContest = require('../../../helper/validation/create-contest');
+const validateContest = require('../../../helper/validation/contest');
 
 const Contest = require('../../../models/contest/Contest');
 
@@ -18,13 +18,13 @@ const createContest = (contestName, createdBy) => {
             if (contest) {
                 errors.contest_name = `Contest with name '${contestName}' already exists`;
                 resolve(objectResponse(false, errors, responseCode.FOUR_HUNDRED));
+            } else {
+                new Contest({
+                    name: contestName,
+                    created_by: createdBy
+                }).save().then(_contest => resolve(messageResponse(true, "Contest Created")))
+                    .catch(err => reject(err));
             }
-
-            new Contest({
-                name: contestName,
-                created_by: createdBy
-            }).save().then(_contest => resolve(messageResponse(true, "Contest Created")))
-                .catch(err => reject(err));
         });
     });
 }
