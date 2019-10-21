@@ -24,14 +24,14 @@ router.post('/create-contest', verifyToken, (req, res) => {
     ).catch(err => console.log(err));
 });
 
-router.post('/edit-contest', verifyToken, (req, res) => {
+router.put('/edit-contest', verifyToken, (req, res) => {
     const { contestOldName, contestNewName, editedBy } = req.body;
     editContest(contestOldName, contestNewName, editedBy).then(
         ({ status, ...resObj }) => res.status(status).json(resObj)
     ).catch(err => console.log(err));
 });
 
-router.get('/get-all-contests', verifyToken, (_req, res) => {
+router.get('/get-contests', verifyToken, (_req, res) => {
     getContests().then(
         ({ status, ...resObj }) => res.status(status).json(resObj)
     ).catch(err => console.log(err));
