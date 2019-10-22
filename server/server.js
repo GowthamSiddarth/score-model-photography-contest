@@ -2,8 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-const users = require('./routes/api/v1/v0/users/User');
-const admin = require('./routes/api/v1/v0/users/Admin');
+const users = require('./routes/api/v1/v0/controller/User');
+const admin = require('./routes/api/v1/v0/controller/Admin');
 
 const app = express();
 
