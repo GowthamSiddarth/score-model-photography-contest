@@ -1,17 +1,17 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const Admin = require('../../../models/users/Admin');
-const User = require('../../../models/users/User');
+const Admin = require('../../../../../../models/users/Admin');
+const User = require('../../../../../../models/users/User');
 
-const typeAdmin = require('../../../models/users/types').ADMIN;
-const typeUser = require('../../../models/users/types').USER;
+const typeAdmin = require('../../../../../../models/users/types').ADMIN;
+const typeUser = require('../../../../../../models/users/types').USER;
 
-const validateUserLogin = require('../../../helper/validation/user-login');
-const { messageResponse, objectResponse } = require('../../../helper/response-entity/response-body');
+const validateUserLogin = require('../../../../../../helper/validation/user-login');
+const { messageResponse, objectResponse } = require('../../../../../../helper/response-entity/response-body');
 
-const secretOrKey = require('../../../config/keys').secretOrKey;
-const responseCode = require('../../../config/response-codes');
+const secretOrKey = require('../../../../../../config/keys').secretOrKey;
+const responseCode = require('../../../../../../config/response-codes');
 
 const login = (email, password, userType) => {
     return new Promise((resolve, reject) => {

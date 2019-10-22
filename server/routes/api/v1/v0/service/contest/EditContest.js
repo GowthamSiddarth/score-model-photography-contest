@@ -1,10 +1,10 @@
-const validateContest = require('../../../helper/validation/contest');
+const validateContest = require('../../../../../../helper/validation/contest');
 
-const responseCode = require('../../../config/response-codes');
+const responseCode = require('../../../../../../config/response-codes');
 
-const { messageResponse, objectResponse } = require('../../../helper/response-entity/response-body');
+const { messageResponse, objectResponse } = require('../../../../../../helper/response-entity/response-body');
 
-const Contest = require('../../../models/contest/Contest');
+const Contest = require('../../../../../../models/contest/Contest');
 
 const editContest = (contestOldName, contestNewName, editedBy) => {
     return new Promise((resolve, reject) => {

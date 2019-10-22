@@ -1,12 +1,12 @@
 const bcrypt = require('bcryptjs');
 
-const User = require('../../../models/users/User');
+const User = require('../../../../../../models/users/User');
 
-const { messageResponse, objectResponse } = require('../../../helper/response-entity/response-body');
+const { messageResponse, objectResponse } = require('../../../../../../helper/response-entity/response-body');
 
-const validateUserRegister = require('../../../helper/validation/user-register');
+const validateUserRegister = require('../../../../../../helper/validation/user-register');
 
-const responseCode = require('../../../config/response-codes');
+const responseCode = require('../../../../../../config/response-codes');
 
 const register = (name, email, password, confirm_password) => {
     return new Promise((resolve, reject) => {

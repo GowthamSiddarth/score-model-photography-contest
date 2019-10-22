@@ -1,11 +1,10 @@
-const Contest = require('../../../models/contest/Contest');
+const Contest = require('../../../../../../models/contest/Contest');
 
-const { objectResponse } = require('../../../helper/response-entity/response-body');
+const { objectResponse } = require('../../../../../../helper/response-entity/response-body');
 
 const getContests = () => {
     return new Promise((resolve, reject) => {
         Contest.find({}, {
-                photographs: false,
                 _id: false,
                 __v: false
             })

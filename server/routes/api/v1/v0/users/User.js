@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const register = require('../../service/auth/Register');
-const login = require('../../service/auth/Login');
+const register = require('../service/auth/Register');
+const login = require('../service/auth/Login');
 
-const user = require('../../../models/users/types').USER;
+const user = require('../../../../../models/users/types').USER;
 
 router.post('/register', (req, res) => {
     const { name, email, password, confirm_password } = req.body;
