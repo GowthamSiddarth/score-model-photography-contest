@@ -2,12 +2,19 @@ const Contest = require('../../../../../../models/contest/Contest');
 
 const { objectResponse } = require('../../../../../../helper/response-entity/response-body');
 
-const getContests = () => {
+const getContests = (contestName) => {
     return new Promise((resolve, reject) => {
-        Contest.find({}, {
-                _id: false,
-                __v: false
-            })
+        if (!contestName) contestName = '';
+        
+        Contest.find({
+            name: {
+                $regex: contestName,
+                $options: "i"
+            }
+        }, {
+            _id: false,
+            __v: false
+        })
             .then(contests => resolve(objectResponse(true, { 'contests': contests })))
             .catch(err => reject(err));
     });

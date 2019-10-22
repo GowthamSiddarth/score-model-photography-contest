@@ -39,8 +39,9 @@ router.delete('/delete-contest', verifyToken, (req, res) => {
     ).catch(err => console.log(err));
 });
 
-router.get('/get-contests', verifyToken, (_req, res) => {
-    getContests().then(
+router.get('/get-contests', verifyToken, (req, res) => {
+    const { contestName } = req.query;
+    getContests(contestName).then(
         ({ status, ...resObj }) => res.status(status).json(resObj)
     ).catch(err => console.log(err));
 });
