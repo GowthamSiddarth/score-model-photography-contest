@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const fileUploadParser = require('express-fileupload');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const users = require('./routes/api/v1/v0/controller/User');
@@ -10,7 +9,6 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(fileUploadParser());
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
