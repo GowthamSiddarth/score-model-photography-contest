@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PhotographSchema = new Schema({
-    image: {
-        type: Schema.Types.Buffer,
+    filename: {
+        type: Schema.Types.String,
         required: true
     },
     submitted_by: {
