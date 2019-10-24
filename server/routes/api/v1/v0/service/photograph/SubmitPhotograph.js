@@ -1,7 +1,7 @@
 const multer = require('multer');
 const path = require('path');
 
-const { messageResponse } = require('../../../../../../helper/response-entity/response-body');
+const { messageResponse, objectResponse } = require('../../../../../../helper/response-entity/response-body');
 
 const Photograph = require('../../../../../../models/contest/Photograph');
 
@@ -10,6 +10,7 @@ const fileUploadLoc = require('../../../../../../config/keys').uploadLoc;
 
 const uploadPhotograph = (req, res, filename) => {
     return new Promise((resolve, reject) => {
+        let fileExtension = '';
         const storage = diskStorage(fileUploadLoc, filename);
         const upload = multer({
             storage: storage,
@@ -18,6 +19,7 @@ const uploadPhotograph = (req, res, filename) => {
                 if ('.png' !== extension && '.jpg' !== extension && '.jpeg' !== extension) {
                     return cb(null, false);
                 } else {
+                    fileExtension = extension;
                     return cb(null, true);
                 }
             }
@@ -25,7 +27,7 @@ const uploadPhotograph = (req, res, filename) => {
 
         upload(req, res, (err) => {
             if (err) return reject(messageResponse(false, "File Upload Failed"));
-            else return resolve(messageResponse(true, "File Uploaded"));
+            else return resolve(objectResponse(true, { extension: fileExtension }));
         });
     });
 };
