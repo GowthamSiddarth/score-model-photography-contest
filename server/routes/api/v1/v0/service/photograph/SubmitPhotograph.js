@@ -1,21 +1,20 @@
 const multer = require('multer');
 const path = require('path');
 
-const { messageResponse, objectResponse } = require('../../../../../../helper/response-entity/response-body');
+const { messageResponse } = require('../../../../../../helper/response-entity/response-body');
 
 const Photograph = require('../../../../../../models/contest/Photograph');
 
-const storage = require('../../../../../config/storage');
-const respCodes = require('../../../../../../config/response-codes');
-const fileUploadLoc = require('../../../../../config/keys').uploadLoc;
+const diskStorage = require('../../../../../../config/disk-storage');
+const fileUploadLoc = require('../../../../../../config/keys').uploadLoc;
 
-const uploadPhotograph = () => {
+const uploadPhotograph = (req, res, filename) => {
     return new Promise((resolve, reject) => {
-        const filename = Date.now();
+        const storage = diskStorage(fileUploadLoc, filename);
         const upload = multer({
-            storage: storage(fileUploadLoc, filename),
+            storage: storage,
             fileFilter: (_req, file, cb) => {
-                const extension = path.extname(file.originalname);
+                const extension = path.extname(file.originalname).toLowerCase();
                 if ('.png' !== extension && '.jpg' !== extension && '.jpeg' !== extension) {
                     return cb(null, false);
                 } else {
@@ -24,9 +23,9 @@ const uploadPhotograph = () => {
             }
         }).single('image');
 
-        upload(req, res, err => {
-            if (err) return reject(messageResponse(false, "File Upload Failed!", respCodes.FIVE_HUNDRED));
-            else return resolve(objectResponse(true, { filename: filename }));
+        upload(req, res, (err) => {
+            if (err) return reject(messageResponse(false, "File Upload Failed"));
+            else return resolve(messageResponse(true, "File Uploaded"));
         });
     });
 };

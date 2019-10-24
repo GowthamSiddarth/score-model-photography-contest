@@ -23,18 +23,17 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/submit-photograph', (req, res) => {
-    uploadPhotograph().then(
+    const filename = Date.now().toString();
+    uploadPhotograph(req, res, filename).then(
         ({ status, ...resObj }) => {
             if (!status) return res.status(status).json(resObj);
             else {
-                const { filename } = resObj;
                 const { userId, description, contestId } = req.body;
                 savePhotoMetaData(filename, userId, description, contestId).then(
                     ({ status, ...resObj }) => res.status(status).json(resObj)
                 ).catch(err => console.log(err));
             }
-        }
-    );
+        })
 });
 
 module.exports = router;
