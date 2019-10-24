@@ -14,7 +14,7 @@ const getPhotographs = (contestName) => {
             .then(contest => {
                 Promise.all(contest.photographs.map(photograph_id =>
                     Photograph.findById(photograph_id, { filename: true })
-                        .then(photograph => photograph.image)
+                        .then(photograph => "http://localhost:7000/api/v1.0/users/get-photograph?filename=" + photograph.filename)
                         .catch(err => console.log(err))
                 ))
                     .then(images => resolve(objectResponse(true, { photographs: images })))

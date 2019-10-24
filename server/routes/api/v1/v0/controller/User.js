@@ -11,7 +11,7 @@ const respCodes = require('../../../../../config/response-codes');
 const user = require('../../../../../models/users/types').USER;
 
 const { uploadPhotograph, savePhotoMetaData, addToContestPhotographs } = require('../service/photograph/SubmitPhotograph');
-const { readPhotograph } = require('../service/photograph/GetPhotographs');
+const { getPhotographs, readPhotograph } = require('../service/photograph/GetPhotographs');
 
 router.post('/register', (req, res) => {
     const { name, email, password, confirm_password } = req.body;
@@ -45,6 +45,13 @@ router.post('/submit-photograph', verifyToken, (req, res) => {
                 ).catch(err => console.log(err));
             }
         })
+});
+
+router.get('/get-photographs', verifyToken, (req, res) => {
+    const { contestName } = req.query;
+    getPhotographs(contestName).then(
+        ({ status, ...resObj }) => res.status(status).json(resObj)
+    ).catch(err => console.log(err));
 });
 
 router.get('/get-photograph', verifyToken, (req, res) => {
