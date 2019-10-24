@@ -6,6 +6,6 @@ module.exports = (destination, filename) => multer.diskStorage({
         cb(null, destination);
     },
     filename: (req, file, cb) => {
-        cb(null, filename + path.extname(file.originalname));
+        cb(null, filename + path.extname(file.originalname).toLowerCase());
     }
 });
