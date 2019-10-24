@@ -6,7 +6,7 @@ const login = require('../service/auth/Login');
 
 const user = require('../../../../../models/users/types').USER;
 
-const { uploadPhotograph, savePhotoMetaData } = require('../service/photograph/SubmitPhotograph');
+const { uploadPhotograph, savePhotoMetaData, addToContestPhotographs } = require('../service/photograph/SubmitPhotograph');
 
 router.post('/register', (req, res) => {
     const { name, email, password, confirm_password } = req.body;
@@ -31,7 +31,12 @@ router.post('/submit-photograph', (req, res) => {
                 const { userId, description, contestId } = req.body;
                 filename = filename + (undefined !== resObj.extension ? resObj.extension : '');
                 savePhotoMetaData(filename, userId, description, contestId).then(
-                    ({ status, ...resObj }) => res.status(status).json(resObj)
+                    ({ status, ...resObj }) => {
+                        const { photographId } = resObj;
+                        addToContestPhotographs(contestId, photographId).then(
+                            ({ status, ...resObj }) => res.status(status).json(resObj))
+                            .catch(err => console.log(err));
+                    }
                 ).catch(err => console.log(err));
             }
         })

@@ -4,6 +4,7 @@ const path = require('path');
 const { messageResponse, objectResponse } = require('../../../../../../helper/response-entity/response-body');
 
 const Photograph = require('../../../../../../models/contest/Photograph');
+const Contest = require('../../../../../../models/contest/Contest');
 
 const diskStorage = require('../../../../../../config/disk-storage');
 const fileUploadLoc = require('../../../../../../config/keys').uploadLoc;
@@ -42,12 +43,23 @@ const savePhotoMetaData = (filename, userId, description, contestId) => {
         });
 
         newPhotograph.save()
-            .then(_photograph => resolve(messageResponse(true, "Photo submitted successfully")))
+            .then(photograph => resolve(objectResponse(true, { photographId: photograph._id })))
+            .catch(err => reject(err));
+    });
+};
+
+const addToContestPhotographs = (contestId, photographId) => {
+    return new Promise((resolve, reject) => {
+        Contest.findByIdAndUpdate(contestId, {
+            $push: { photographs: photographId }
+        }, { new: true })
+            .then(contest => resolve(messageResponse(true, "Photograph Submitted Successfully")))
             .catch(err => reject(err));
     });
 };
 
 module.exports = {
     uploadPhotograph,
-    savePhotoMetaData
+    savePhotoMetaData,
+    addToContestPhotographs
 };
