@@ -41,7 +41,7 @@ router.delete('/delete-contest', verifyToken, (req, res) => {
 
 router.get('/get-contests', verifyToken, (req, res) => {
     const { contestName } = req.query;
-    getContests(contestName).then(
+    getContests(contestName, admin).then(
         ({ status, ...resObj }) => res.status(status).json(resObj)
     ).catch(err => console.log(err));
 });
