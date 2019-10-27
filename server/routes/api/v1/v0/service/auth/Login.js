@@ -36,7 +36,7 @@ const login = (email, password, userType) => {
                     const jwtPayload = {
                         id: user.id,
                         name: user.name,
-                        isAdmin: typeAdmin === authUser
+                        isAdmin: typeAdmin === userType
                     };
 
                     jwt.sign(jwtPayload, secretOrKey, { expiresIn: 31556926 }, (err, token) => {
