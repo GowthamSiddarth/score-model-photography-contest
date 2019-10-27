@@ -5,7 +5,7 @@ const { USER } = require('../../../../../../models/users/types');
 const { objectResponse, messageResponse } = require('../../../../../../helper/response-entity/response-body');
 const respCodes = require('../../../../../../config/response-codes');
 
-const getContests = (contestName, userType, contestantId) => {
+const getContestsForUser = (contestName, userType, contestantId) => {
     return new Promise((resolve, reject) => {
         if (!contestName) contestName = '';
 
@@ -17,7 +17,7 @@ const getContests = (contestName, userType, contestantId) => {
         };
 
         if (USER === userType) {
-            if (!contestantId) return resolve(messageResponse(false, "", respCodes.FOUR_HUNDRED));
+            if (!contestantId) return resolve(messageResponse(false, "Contestant Id is missing", respCodes.FOUR_HUNDRED));
             findQuery['contestants'] = {
                 $in: [contestantId]
             };
@@ -34,4 +34,6 @@ const getContests = (contestName, userType, contestantId) => {
     });
 }
 
-module.exports = getContests;
+module.exports = {
+    getContestsForUser
+};

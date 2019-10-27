@@ -6,7 +6,7 @@ const { verifyToken } = require('../../../../../helper/request-entity/request-he
 const login = require('../service/auth/Login');
 const createContest = require('../service/contest/CreateContest');
 const editContest = require('../service/contest/EditContest');
-const getContests = require('../service/contest/GetContests');
+const { getContestsForUser } = require('../service/contest/GetContests');
 const deleteContest = require('../service/contest/DeleteContest');
 
 const admin = require('../../../../../models/users/types').ADMIN;
@@ -41,7 +41,7 @@ router.delete('/delete-contest', verifyToken, (req, res) => {
 
 router.get('/get-contests', verifyToken, (req, res) => {
     const { contestName } = req.query;
-    getContests(contestName, admin).then(
+    getContestsForUser(contestName, admin).then(
         ({ status, ...resObj }) => res.status(status).json(resObj)
     ).catch(err => console.log(err));
 });

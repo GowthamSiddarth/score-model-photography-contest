@@ -12,7 +12,7 @@ const user = require('../../../../../models/users/types').USER;
 
 const { uploadPhotograph, savePhotoMetaData, addToContestPhotographs } = require('../service/photograph/SubmitPhotograph');
 const { getPhotographs, readPhotograph } = require('../service/photograph/GetPhotographs');
-const getContests = require('../service/contest/GetContests');
+const { getContestsForUser } = require('../service/contest/GetContests');
 
 router.post('/register', (req, res) => {
     const { name, email, password, confirm_password } = req.body;
@@ -31,7 +31,7 @@ router.post('/login', (req, res) => {
 router.post('/get-contests', verifyToken, (req, res) => {
     const { contestName } = req.query;
     const { id } = req.body;
-    getContests(contestName, user, id).then(
+    getContestsForUser(contestName, user, id).then(
         ({ status, ...resObj }) => res.status(status).json(resObj)
     ).catch(err => console.log(err));
 });
