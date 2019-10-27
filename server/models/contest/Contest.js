@@ -25,6 +25,10 @@ const ContestSchema = new Schema({
     photographs: {
         type: Schema.Types.Array,
         required: false
+    },
+    contestants: {
+        type: Schema.Types.ObjectId,
+        required: false
     }
 });
 
