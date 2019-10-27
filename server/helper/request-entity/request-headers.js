@@ -11,17 +11,17 @@ const verifyToken = (req, res, next) => {
 
     jwt.verify(token, secretOrKey, (err, decoded) => {
         if (err) {
-            res.status(500).json(messageResponse(false, "Failed to authenticate token"));
+            return res.status(500).json(messageResponse(false, "Failed to authenticate token"));
         }
 
         const authUser = decoded.isAdmin ? require('../../models/users/Admin') : require('../../models/users/User');
         authUser.findById(decoded.id, { password: false }, (err, _authUser) => {
             if (err) {
-                res.status(500).json(messageResponse(false, "There was a problem finding User. Please contact administrator"));
+                return res.status(500).json(messageResponse(false, "There was a problem finding User. Please contact administrator"));
             }
 
             if (!_authUser) {
-                res.status(404).json(messageResponse(false, "User not found!"));
+                return res.status(404).json(messageResponse(false, "User not found!"));
             }
 
             next();
