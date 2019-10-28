@@ -1,8 +1,11 @@
 import React, { Component } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { bindActionCreators } from "redux";
+
+import { logoutUser } from "../../utils/redux/actions/authActions";
 
 const navIconTextItemStyle = {
     fontFamily: "monospace",
@@ -27,9 +30,31 @@ class LoginNavLink extends Component {
 }
 
 class AuthUserNameElement extends Component {
+
+    onLogoutClick(e) {
+        e.preventDefault();
+        this.props.logoutUser(this.props.history);
+    }
+
     render() {
         return (
-            <p className="black-text my-auto" style={{ fontFamily: "monospace", MozUserSelect: "none", WebkitUserSelect: "none", msUserSelect: "none" }}>Signed In as: {this.props.userName}</p>
+            <div>
+                <p className="black-text my-auto" style={{ fontFamily: "monospace", MozUserSelect: "none", WebkitUserSelect: "none", msUserSelect: "none" }}>
+                Signed In as: 
+                <Button
+                    variant="outline-secondary"
+                    style={{
+                        width: "150px",
+                        borderRadius: "3px",
+                        letterSpacing: "1.5px",
+                        marginTop: "1rem"
+                    }}
+                    onClick={this.onLogoutClick.bind(this)}
+                    className="waves-effect waves-light hoverable black-text my-auto">
+                    {this.props.userName}
+                </Button>
+                </p>
+            </div>
         );
     }
 }
@@ -51,7 +76,7 @@ class NavigationBar extends Component {
                     {
                         this.props.auth.isAuthenticated ?
                             <Nav>
-                                <AuthUserNameElement userName={this.props.auth.user.name.split(" ")[0]} />
+                                <AuthUserNameElement userName={this.props.auth.user.name.split(" ")[0]} logoutUser={this.props.logoutUser} />
                             </Nav> :
                             <Nav>
                                 <RegisterNavLink />
@@ -65,6 +90,7 @@ class NavigationBar extends Component {
 }
 
 NavigationBar.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 };
 
@@ -72,4 +98,8 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps)(withRouter(NavigationBar));
+const mapDispatchToProps = dispatch => ({
+    logoutUser: bindActionCreators(logoutUser, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavigationBar));
