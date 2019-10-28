@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../utils/redux/actions/authActions";
 import { getContestsForUser } from "../../utils/redux/actions/dashboardActions";
 
-import { Container, Row, Col, Button, Table } from "react-bootstrap";
+import { Container, Row, Col, Table } from "react-bootstrap";
 
 import Moment from "moment";
 
@@ -25,8 +25,6 @@ class Dashboard extends Component {
         e.preventDefault();
         this.props.logoutUser(this.props.history);
     }
-
-
 
     render() {
         return (
