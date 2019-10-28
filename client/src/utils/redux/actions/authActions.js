@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
 
 export const registerUser = (userData, history) => dispatch => {
-    axios.post('/api/users/register', userData)
+    axios.post('/api/v1.0/users/register', userData)
         .then(res => history.push('/login'))
         .catch(err => dispatch({
             type: GET_ERRORS,
@@ -13,7 +13,7 @@ export const registerUser = (userData, history) => dispatch => {
 }
 
 export const loginUser = (userData, history) => dispatch => {
-    const loginApi = 'adminSignIn' === userData.userSignInType ? '/api/admin/login' : '/api/users/login';
+    const loginApi = 'adminSignIn' === userData.userSignInType ? '/api/v1.0/admin/login' : '/api/v1.0/users/login';
     axios.post(loginApi, userData)
         .then(res => {
             const { token } = res.data;
