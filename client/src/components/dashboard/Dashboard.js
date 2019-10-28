@@ -5,10 +5,16 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { logoutUser } from "../../utils/redux/actions/authActions";
+import { getContestsForUser } from "../../utils/redux/actions/dashboardActions";
 
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Table } from "react-bootstrap";
 
 class Dashboard extends Component {
+
+    componentDidMount() {
+        const userData = { id: this.props.auth.user.id }
+        this.props.getContestsForUser(userData);
+    }
 
     onLogoutClick(e) {
         e.preventDefault();
@@ -16,31 +22,26 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { user } = this.props.auth;
-
         return (
             <Container>
                 <Row>
                     <Col className="text-center">
-                        <h4>
-                            <b>Hey there,</b> {user.name.split(" ")[0]}
-                            <p className="flow-text grey-text text-darken-1">
-                                You're logged into
-                                <span style={{ fontFamily: "monospace" }}> Photography Scoring Model Contest</span>
-                            </p>
-                        </h4>
-                        <Button
-                            variant="outline-secondary"
-                            style={{
-                                width: "150px",
-                                borderRadius: "3px",
-                                letterSpacing: "1.5px",
-                                marginTop: "1rem"
-                            }}
-                            onClick={this.onLogoutClick.bind(this)}
-                            className="waves-effect waves-light hoverable">
-                            Sign Out
-                        </Button>
+                        {
+                            !this.props.dashboard.contests ? <p>Loading...</p> :
+                                <Table striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Contest Name</th>
+                                            <th>Created On</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            this.props.dashboard.contests.map((contest, idx) => <tr key={idx}><td className="text-center">{contest.name}</td><td className="text-center">{contest.created_on}</td></tr>)
+                                        }
+                                    </tbody>
+                                </Table>
+                        }
                     </Col>
                 </Row>
             </Container>
@@ -50,15 +51,18 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     logoutUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    dashboard: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    dashboard: state.dashboard
 });
 
 const mapDispatchToProps = dispatch => ({
-    logoutUser: bindActionCreators(logoutUser, dispatch)
+    logoutUser: bindActionCreators(logoutUser, dispatch),
+    getContestsForUser: bindActionCreators(getContestsForUser, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Dashboard));
