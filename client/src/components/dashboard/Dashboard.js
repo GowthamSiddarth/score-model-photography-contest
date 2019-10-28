@@ -12,7 +12,10 @@ import { Container, Row, Col, Button, Table } from "react-bootstrap";
 class Dashboard extends Component {
 
     componentDidMount() {
-        const userData = { id: this.props.auth.user.id }
+        const userData = {
+            id: this.props.auth.user.id,
+            isAdmin: this.props.auth.user.isAdmin
+        };
         this.props.getContestsForUser(userData);
     }
 
