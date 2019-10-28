@@ -42,7 +42,7 @@ const login = (email, password, userType) => {
                     jwt.sign(jwtPayload, secretOrKey, { expiresIn: 31556926 }, (err, token) => {
                         if (err) return reject(err);
                         else
-                            return resolve(objectResponse(true, { token: "Bearer " + token }, responseCode.TWO_HUNDRED));
+                            return resolve(objectResponse(true, { token: token }, responseCode.TWO_HUNDRED));
                     });
                 } else {
                     errors.password = "Password Incorrect!";
