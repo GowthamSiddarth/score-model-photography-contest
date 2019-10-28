@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { bindActionCreators } from "redux";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { logoutUser } from "../../utils/redux/actions/authActions";
 import { getContestsForUser } from "../../utils/redux/actions/dashboardActions";
 
 import { Container, Row, Col, Button, Table } from "react-bootstrap";
+
+import Moment from "moment";
 
 class Dashboard extends Component {
 
@@ -23,6 +25,8 @@ class Dashboard extends Component {
         e.preventDefault();
         this.props.logoutUser(this.props.history);
     }
+
+
 
     render() {
         return (
@@ -40,7 +44,7 @@ class Dashboard extends Component {
                                     </thead>
                                     <tbody>
                                         {
-                                            this.props.dashboard.contests.map((contest, idx) => <tr key={idx}><td className="text-center">{contest.name}</td><td className="text-center">{contest.created_on}</td></tr>)
+                                            this.props.dashboard.contests.map((contest, idx) => <tr key={idx}><td className="text-center"><Link>{contest.name}</Link></td><td className="text-center">{Moment(contest.created_on).format('Do MMM YYYY')}</td></tr>)
                                         }
                                     </tbody>
                                 </Table>
