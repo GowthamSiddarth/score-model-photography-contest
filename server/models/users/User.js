@@ -19,6 +19,14 @@ const UserSchema = new Schema({
     date: {
         type: Schema.Types.Date,
         default: Date.now
+    },
+    my_contests: {
+        type: Schema.Types.Array,
+        required: false
+    },
+    my_submissions: {
+        type: Schema.Types.Array,
+        required: false
     }
 });
 
