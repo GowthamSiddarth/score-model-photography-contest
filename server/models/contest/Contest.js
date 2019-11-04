@@ -6,6 +6,10 @@ const ContestSchema = new Schema({
         type: Schema.Types.String,
         required: true
     },
+    description: {
+        type: Schema.Types.String,
+        required: true
+    },
     created_by: {
         type: Schema.Types.ObjectId,
         required: true
@@ -13,6 +17,10 @@ const ContestSchema = new Schema({
     created_on: {
         type: Schema.Types.Date,
         default: Date.now
+    },
+    ends_on: {
+        type: Schema.Types.Date,
+        required: false
     },
     last_edited_by: {
         type: Schema.Types.ObjectId,
@@ -27,7 +35,7 @@ const ContestSchema = new Schema({
         required: false
     },
     contestants: {
-        type: Schema.Types.ObjectId,
+        type: Schema.Types.Array,
         required: false
     }
 });
