@@ -1,4 +1,6 @@
 const Contest = require('../../../../../../models/contest/Contest');
+const Photograph = require('../../../../../../models/contest/Photograph');
+const User = require('../../../../../../models/users/User');
 
 const { USER } = require('../../../../../../models/users/types');
 
@@ -34,6 +36,24 @@ const getContestsForUser = (contestName, userType, contestantId) => {
     });
 }
 
+const getContestDetails = (contestName, contestantId) => {
+    return new Promise((resolve, reject) => {
+        Contest.findOne({ name: contestName }, {
+            name: true,
+            description: true,
+            created_on: true,
+            ends_on: true,
+            contestants: true
+        }).then(contest => {
+            let contestDetails = contest.toObject();
+            contestDetails.can_submit = contest.contestants.includes(contestantId);
+            delete contestDetails.contestants;
+            return resolve(objectResponse(true, { contest_details: contestDetails }));
+        }).catch(err => reject(err));
+    });
+};
+
 module.exports = {
-    getContestsForUser
+    getContestsForUser,
+    getContestDetails
 };
