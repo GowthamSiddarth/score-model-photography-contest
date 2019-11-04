@@ -12,7 +12,7 @@ const user = require('../../../../../models/users/types').USER;
 
 const { uploadPhotograph, savePhotoMetaData, addToContestPhotographs } = require('../service/photograph/SubmitPhotograph');
 const { getPhotographs, readPhotograph } = require('../service/photograph/GetPhotographs');
-const { getContestsForUser } = require('../service/contest/GetContests');
+const { getContestsForUser, getContestDetails } = require('../service/contest/GetContests');
 
 router.post('/register', (req, res) => {
     const { name, email, password, confirm_password } = req.body;
@@ -72,6 +72,13 @@ router.get('/get-photograph', verifyToken, (req, res) => {
         res.writeHead(respCodes.TWO_HUNDRED, 'Content-Type', 'image/' + imageType);
         res.end(data);
     }).catch(err => console.log(err));
+});
+
+router.post('/get-contest-details', verifyToken, (req, res) => {
+    const { contestName, contestantId } = req.body;
+    getContestDetails(contestName, contestantId).then(
+        ({ status, ...resObj }) => res.status(status).json(resObj)
+    ).catch(err => console.log(err));
 });
 
 module.exports = router;
