@@ -15,8 +15,8 @@ const { getPhotographs, readPhotograph } = require('../service/photograph/GetPho
 const { getContestsForUser, getContestDetails } = require('../service/contest/GetContests');
 
 router.post('/register', (req, res) => {
-    const { name, email, password, confirm_password } = req.body;
-    register(name, email, password, confirm_password).then(
+    const { name, email, password, confirm_password, group_name } = req.body;
+    register(name, email, password, confirm_password, group_name).then(
         ({ status, ...resObj }) => res.status(status).json(resObj)
     ).catch(err => console.log(err));
 });
