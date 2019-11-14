@@ -29,7 +29,7 @@ const UserSchema = new Schema({
         required: false
     },
     my_groups: {
-        type: Schema.Types.Array,
+        type: [Schema.Types.ObjectId],
         required: true
     }
 });
