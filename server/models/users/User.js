@@ -27,6 +27,10 @@ const UserSchema = new Schema({
     my_submissions: {
         type: Schema.Types.Array,
         required: false
+    },
+    my_groups: {
+        type: Schema.Types.Array,
+        required: true
     }
 });
 
